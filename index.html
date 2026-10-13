@@ -1,1 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080b0a">
+  <title>MCMods - Minecraft mod discovery</title>
+  <meta name="description" content="Discover Minecraft mods, shaders and texture packs. Every listing credits its creator and links to the official download page.">
 
+  <!-- Fonts: free from Google Fonts. If you are offline the site falls back to system fonts. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=DM+Sans:wght@400;500;700&display=swap">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ============ HEADER ============ -->
+  <header class="site-header">
+    <div class="wrap header-row">
+      <a class="brand" href="#/" aria-label="MCMods home">
+        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+          <polygon points="16,2 29,9 16,16 3,9" fill="#7bf5b8"/>
+          <polygon points="3,9 16,16 16,30 3,23" fill="#14a869"/>
+          <polygon points="29,9 16,16 16,30 29,23" fill="#0a6c47"/>
+          <rect x="7" y="12" width="3" height="3" fill="#0a6c47" opacity=".55"/>
+          <rect x="20" y="18" width="3" height="3" fill="#7bf5b8" opacity=".55"/>
+        </svg>
+        <span class="brand-name">MC<span>Mods</span></span>
+      </a>
+
+      <nav class="main-nav" id="mainNav" aria-label="Main">
+        <a href="#/" data-nav="home">Home</a>
+        <a href="#/browse?category=mods" data-nav="mods">Mods</a>
+        <a href="#/browse?category=shaders" data-nav="shaders">Shaders</a>
+        <a href="#/browse?category=texture-packs" data-nav="texture-packs">Texture Packs</a>
+        <a href="#/browse" data-nav="browse">Browse all</a>
+        <a href="#/page/about" data-nav="about">About</a>
+      </nav>
+
+      <form class="search" id="searchForm" role="search" autocomplete="off">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+        <input id="searchInput" type="search" name="q" placeholder="Search mods, shaders, packs" aria-label="Search by name">
+      </form>
+
+      <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="mainNav" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ============ HOME VIEW ============ -->
+    <div id="viewHome">
+
+      <section class="hero" id="hero">
+        <canvas class="hero-art" id="heroArt" aria-hidden="true"></canvas>
+        <div class="hero-fade" aria-hidden="true"></div>
+        <div class="wrap hero-grid">
+          <div class="hero-copy">
+            <h1>Find the mods worth installing.</h1>
+            <p class="lead">MCMods is a discovery guide for Minecraft mods, shaders and texture packs. Every listing credits its creator and sends you to their official download page.</p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#/browse">Browse all content</a>
+              <a class="btn btn-ghost" href="#top-downloads" data-scroll>See top downloads</a>
+            </div>
+            <ul class="hero-facts" id="heroFacts"></ul>
+          </div>
+
+          <div class="featured" id="featured" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <section class="section wrap" id="categories">
+        <div class="section-head">
+          <h2>Browse by category</h2>
+          <p>Pick a category to filter the catalog.</p>
+        </div>
+        <div class="cat-grid" id="catGrid"></div>
+      </section>
+
+      <section class="section wrap" id="top-downloads">
+        <div class="section-head">
+          <div>
+            <h2 id="topTitle">Top downloads</h2>
+            <p id="topNote"></p>
+          </div>
+          <a class="more-link" href="#/browse?sort=downloads">See all by downloads</a>
+        </div>
+        <div class="grid" id="topGrid"></div>
+      </section>
+
+      <section class="section wrap" id="recent">
+        <div class="section-head">
+          <div>
+            <h2>Recently updated</h2>
+            <p>Latest releases from the creators.</p>
+          </div>
+          <a class="more-link" href="#/browse?sort=newest">See newest</a>
+        </div>
+        <div class="grid" id="recentGrid"></div>
+      </section>
+
+      <section class="section wrap" id="trust">
+        <div class="trust-grid">
+          <article class="trust-card">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.3 8-8 9-4.7-1-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>
+            <h3>Downloads come from the creator</h3>
+            <p>Every download button opens the creator's official page. MCMods does not host or re-upload files.</p>
+          </article>
+          <article class="trust-card">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>
+            <h3>Creators are credited</h3>
+            <p>Each page shows who made it, its license when one is published, and the source it came from.</p>
+          </article>
+          <article class="trust-card">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>
+            <h3>Real numbers, or none</h3>
+            <p>Download counts are read live from Modrinth. If they can't load, you'll see that instead of a guess.</p>
+          </article>
+        </div>
+      </section>
+    </div>
+
+    <!-- ============ BROWSE VIEW ============ -->
+    <div id="viewBrowse" hidden>
+      <div class="wrap browse">
+        <div class="browse-head">
+          <h1 id="browseTitle">All content</h1>
+          <p id="browseBlurb"></p>
+        </div>
+
+        <div class="filters" aria-label="Filters">
+          <div class="chips" id="chipRow" role="group" aria-label="Category"></div>
+
+          <div class="filter-row">
+            <div class="field">
+              <span class="field-label" id="edLabel">Edition</span>
+              <div class="seg" id="editionSeg" role="group" aria-labelledby="edLabel">
+                <button type="button" data-edition="">All</button>
+                <button type="button" data-edition="java">Java</button>
+                <button type="button" data-edition="bedrock">Bedrock</button>
+              </div>
+            </div>
+
+            <label class="field">
+              <span class="field-label">Game version</span>
+              <select id="versionSelect"><option value="">Any version</option></select>
+            </label>
+
+            <label class="field">
+              <span class="field-label">Sort by</span>
+              <select id="sortSelect">
+                <option value="newest">Newest</option>
+                <option value="popular">Most popular</option>
+                <option value="downloads">Most downloaded</option>
+              </select>
+            </label>
+
+            <button class="btn btn-ghost btn-small" id="clearBtn" type="button">Clear filters</button>
+          </div>
+        </div>
+
+        <div class="result-bar">
+          <p id="resultCount" aria-live="polite"></p>
+          <p class="status" id="statusPill"></p>
+        </div>
+
+        <div class="grid" id="resultGrid"></div>
+        <div class="empty" id="emptyState" hidden></div>
+        <div class="center"><button class="btn btn-ghost" id="loadMoreBtn" type="button" hidden>Show more</button></div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="wrap footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="#/" aria-label="MCMods home">
+          <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+            <polygon points="16,2 29,9 16,16 3,9" fill="#7bf5b8"/>
+            <polygon points="3,9 16,16 16,30 3,23" fill="#14a869"/>
+            <polygon points="29,9 16,16 16,30 29,23" fill="#0a6c47"/>
+          </svg>
+          <span class="brand-name">MC<span>Mods</span></span>
+        </a>
+        <p>A discovery guide that links to creators' official pages. Not affiliated with Mojang Studios or Microsoft. Minecraft is a trademark of Mojang Studios.</p>
+      </div>
+      <nav aria-label="Explore">
+        <h4>Explore</h4>
+        <a href="#/browse?category=mods">Mods</a>
+        <a href="#/browse?category=shaders">Shaders</a>
+        <a href="#/browse?category=texture-packs">Texture Packs</a>
+        <a href="#/browse">Browse all</a>
+      </nav>
+      <nav aria-label="Information">
+        <h4>MCMods</h4>
+        <a href="#/page/about">About</a>
+        <a href="#/page/contact">Contact</a>
+        <a href="#/page/privacy">Privacy Policy</a>
+        <a href="#/page/terms">Terms</a>
+      </nav>
+    </div>
+    <div class="wrap footer-base">
+      <p>Project data from the <a href="https://docs.modrinth.com/api/" target="_blank" rel="noopener noreferrer">Modrinth public API</a>. Every item belongs to its creators.</p>
+      <p id="footStatus"></p>
+    </div>
+  </footer>
+
+  <!-- ============ ITEM MODAL ============ -->
+  <div class="modal" id="itemModal" role="dialog" aria-modal="true" aria-labelledby="itemTitle" hidden>
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-panel" id="itemPanel" tabindex="-1"></div>
+  </div>
+
+  <!-- ============ PAGE MODAL (About, Contact, Privacy, Terms) ============ -->
+  <div class="modal" id="pageModal" role="dialog" aria-modal="true" aria-labelledby="pageTitle" hidden>
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-panel narrow" id="pagePanel" tabindex="-1"></div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+  <noscript>
+    <p class="noscript">MCMods needs JavaScript to show the catalog. Please enable JavaScript and reload.</p>
+  </noscript>
+
+  <script src="app.js"></script>
+</body>
+  </html>
+  
